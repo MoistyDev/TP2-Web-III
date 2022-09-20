@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wordle</title>
+    <link rel="stylesheet" href="public/stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="public/stylesheets/mobile.css">
+    <link rel="shortcut icon" href="public/images/alpha-wordle-icon-new-square320-v3.webp" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script type="module" src="/public/javascripts/javascript.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="navbar">
+          <div class="hamburger">
+            <a href="#">
+              <img src="/public/images/menu_FILL0_wght600_GRAD200_opsz40.svg" alt="">
+            </a>
+          </div>
+          <div class="icon">
+              <h1>Wordle</h1>
+          </div>
+          <div class="misc">
+            <a href="#">
+              <img src="/public/images/help_FILL0_wght500_GRAD0_opsz48.svg" alt="">
+            </a>
+            <a href="#">
+              <img src="/public/images/leaderboard_FILL0_wght400_GRAD0_opsz48.svg" alt="">
+            </a>
+            <a class="settings-icon" href="#">
+              <img src="/public/images/settings_FILL1_wght400_GRAD0_opsz48.svg" alt="">
+            </a>
+          </div>
+      </div>
+
+      <div class="refresh-icon">
+        <img data-refresh-icon="" src="/public/images/restart_alt_FILL0_wght500_GRAD0_opsz40.svg" alt="">
+      </div>
+
+      <div class="content">
+        <div class="word-grid text-center">
+          <div data-grid-case="1" data-grid-row="1" data-letter-match=""class="grid-item">&nbsp</div>
+          <div data-grid-case="2" data-grid-row="1" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="3" data-grid-row="1" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="4" data-grid-row="1" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="5" data-grid-row="1" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="6" data-grid-row="2" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="7" data-grid-row="2" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="8" data-grid-row="2" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="9" data-grid-row="2" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="10" data-grid-row="2" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="11" data-grid-row="3" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="12" data-grid-row="3" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="13" data-grid-row="3" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="14" data-grid-row="3" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="15" data-grid-row="3" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="16" data-grid-row="4" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="17" data-grid-row="4" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="18" data-grid-row="4" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="19" data-grid-row="4" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="20" data-grid-row="4" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="21" data-grid-row="5" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="22" data-grid-row="5" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="23" data-grid-row="5" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="24" data-grid-row="5" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="25" data-grid-row="5" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="26" data-grid-row="6" data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="27" data-grid-row="6"  data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="28" data-grid-row="6"  data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="29" data-grid-row="6"  data-letter-match="" class="grid-item">&nbsp</div>
+          <div data-grid-case="30" data-grid-row="6"  data-letter-match="" class="grid-item">&nbsp</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="on-screen-kbd">
+          <div class="row">
+            <div data-kbd-key="q" class="col">Q</div>
+            <div data-kbd-key="w" class="col">W</div>
+            <div data-kbd-key="e" class="col">E</div>
+            <div data-kbd-key="r" class="col">R</div>
+            <div data-kbd-key="t" class="col">T</div>
+            <div data-kbd-key="y" class="col">Y</div>
+            <div data-kbd-key="u" class="col">U</div>
+            <div data-kbd-key="i" class="col">I</div>
+            <div data-kbd-key="o" class="col">O</div>
+            <div data-kbd-key="p" class="col">P</div>
+          </div>
+          <div class="row">
+            <div data-kbd-key="a" class="col">A</div>
+            <div data-kbd-key="s" class="col">S</div>
+            <div data-kbd-key="d" class="col">D</div>
+            <div data-kbd-key="f" class="col">F</div>
+            <div data-kbd-key="g" class="col">G</div>
+            <div data-kbd-key="h" class="col">H</div>
+            <div data-kbd-key="j" class="col">J</div>
+            <div data-kbd-key="k" class="col">K</div>
+            <div data-kbd-key="l" class="col">L</div>
+          </div>
+          <div class="row">
+            <div data-kbd-key="enter" class="col-2">ENTER</div>
+            <div data-kbd-key="z" class="col">Z</div>
+            <div data-kbd-key="x" class="col">X</div>
+            <div data-kbd-key="c" class="col">C</div>
+            <div data-kbd-key="v" class="col">V</div>
+            <div data-kbd-key="b" class="col">B</div>
+            <div data-kbd-key="n" class="col">N</div>
+            <div data-kbd-key="m" class="col">M</div>
+            <div data-kbd-key="delete" class="col-2">DELETE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </body>
+</html>
