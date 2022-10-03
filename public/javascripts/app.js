@@ -433,5 +433,3 @@ printGrid();
 printStates();
 defineCurrentCase();
 defineCurrentRow();
-console.log(currentRow + " row");
-console.log(WORDS);
