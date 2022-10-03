@@ -5,6 +5,10 @@
     --not-in-the-word-bc: #818384;
 }
 
+html {
+    user-select: none;
+}
+
 .container-fluid {
     padding: 0px;
     padding-top: 0.3rem;
@@ -20,11 +24,24 @@
     font-family: 'Roboto Slab', serif;
     font-weight: bolder;
     letter-spacing: -1px;
-    padding-left: 6.9rem;
+    padding-left: 6.6rem;
 }
 
 .navbar .misc a{
     text-decoration: none;
+}
+
+.btn:focus {
+    outline: 0;
+}
+
+.stat {
+    font-size: larger;
+    text-align: center;
+}
+
+.stat-text {
+    font-size: small;
 }
 
 .content {
@@ -36,11 +53,34 @@
 .refresh-icon {
     display: flex;
     justify-content: center;
-    user-select: none;
 }
 
+.refresh-icon .btn {
+    background-color: var(--matches-bc);
+    color: white;
+    border: 2px solid var(--grey-outline);
+    font-size: large;
+    font-weight: 530;
+}
+
+.refresh-icon .btn:hover, .btn:active {
+    border: 2px solid var(--grey-outline);
+    background-color: var(--matches-bc);
+    color: white;
+    box-shadow: none;
+}
+
+button.active.focus, button.active:focus,
+button.focus, button:active.focus, 
+button:active:focus, button:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: white;
+}
+ 
 .word-grid {
     height: 23rem;
+    max-height: 23rem;
     width: 18rem;
     margin-top: 1rem;
     margin-bottom: 3rem;
@@ -54,16 +94,20 @@
 }
 
 .word-grid .grid-item {
-    border: 1px solid var(--grey-outline);
+    border: 2px solid var(--grey-outline);
     text-align: center;
-    max-width: 150px;
-    min-width: 55px;
-    padding-top: 28%;
+    font-size: 1.6rem;
+    font-weight: bold;
+    max-width: 9.375rem;
+    min-width: 3.438rem;
+    height: 3.667rem;
+    max-height: 3.667rem;
+    padding-top: 12%;
     border-radius: 3px;
 }
 
 .on-screen-kbd {
-    min-width: 394px;
+    min-width: 24.625rem;
 }
 
 .on-screen-kbd .col, .col-2 {
@@ -71,7 +115,7 @@
     height: 3rem;
     width: 4rem;
     border-radius: 5px;
-    opacity: 0.6;
+    opacity: 0.8;
     user-select: none;
 }
 
@@ -105,4 +149,28 @@
     background-color: var(--not-in-the-word-bc);
     color: white;
     transition: background-color 500ms linear;
+}
+
+.darkMode-body {
+    background-color: #000000;
+    color : white;
+}
+
+.darkMode-navbar {
+    border-bottom: 1px solid #3a3a3c;
+}
+
+.darkMode-icons {
+    filter: invert(100%);
+}
+
+.darkMode-modals {
+    background-color: #171717 !important; 
+    color: white !important;
+}
+
+.darkMode-kbd {
+    background-color: #171717;
+    color: white;
+    opacity: 60%;
 }
