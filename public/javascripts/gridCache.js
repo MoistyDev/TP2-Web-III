@@ -114,29 +114,15 @@ let CASE_STATUS = [
     }
 ]
 
-function saveGrid() {
-    $(window).bind('beforeunload', function(e) {
-        localStorage.setItem('grid', JSON.stringify(GRID_VALUES));
-    })
-}
-
-function saveStates() {
-    $(window).bind('beforeunload', function(e) {
-        localStorage.setItem('states', JSON.stringify(CASE_STATUS));
-    })
-}
-
-function setStates() {
-    if (JSON.parse(localStorage.getItem('states')) != null) {
-        CASE_STATUS = JSON.parse(localStorage.getItem('states'));
+export function resetGridValues() {
+    for (let i = 0; i < GRID_VALUES.length; i++) {
+        GRID_VALUES[i].word = "";
     }
 }
 
-function setGrid() {
-    if (JSON.parse(localStorage.getItem('grid')) != null) {
-        GRID_VALUES = JSON.parse(localStorage.getItem('grid'));
-    } else {
-        resetGridValues();
+export function resetCasesStates() {
+    for (let i = 0; i < CASE_STATUS.length; i++) {
+        CASE_STATUS[i].status = "";
     }
 }
 
@@ -218,6 +204,32 @@ export function saveRowToArray(row) {
     getAttributeList();
 }
 
+function saveGrid() {
+    $(window).bind('beforeunload', function(e) {
+        localStorage.setItem('grid', JSON.stringify(GRID_VALUES));
+    })
+}
+
+function saveStates() {
+    $(window).bind('beforeunload', function(e) {
+        localStorage.setItem('states', JSON.stringify(CASE_STATUS));
+    })
+}
+
+function setStates() {
+    if (JSON.parse(localStorage.getItem('states')) != null) {
+        CASE_STATUS = JSON.parse(localStorage.getItem('states'));
+    }
+}
+
+function setGrid() {
+    if (JSON.parse(localStorage.getItem('grid')) != null) {
+        GRID_VALUES = JSON.parse(localStorage.getItem('grid'));
+    } else {
+        resetGridValues();
+    }
+}
+
 function getAttributeList() {
     const gridCases = document.querySelectorAll('[data-grid-case]');
     for (const gridCase of gridCases) {
@@ -230,18 +242,6 @@ function getAttributeList() {
         if ($(gridCase).hasClass("notInTheWord")) {
             CASE_STATUS[$(gridCase).attr("data-grid-case") - 1].status = "notInTheWord";
         }
-    }
-}
-
-export function resetGridValues() {
-    for (let i = 0; i < GRID_VALUES.length; i++) {
-        GRID_VALUES[i].word = "";
-    }
-}
-
-export function resetCasesStates() {
-    for (let i = 0; i < CASE_STATUS.length; i++) {
-        CASE_STATUS[i].status = "";
     }
 }
 
