@@ -83,4 +83,3 @@ function updateGraphRows() {
 }
 
 saveGuesses();
-localStorage.clear();
