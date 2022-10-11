@@ -189,12 +189,17 @@ button:active:focus, button:focus {
 }
 
 .graph {
+    color: var(--dm-body);
+    background-color: var(--grey-outline);
     margin: 0.25rem;
     padding: 0.25rem;
-    padding-left: 0.75rem;
     border-radius: 2px;
-    background-color: var(--not-in-the-word-bc);
     width: 10%;
     font-weight: bold;
     justify-content: center;
+}
+
+.graph-dark-mode {
+    background-color: var(--not-in-the-word-bc);
+    color: var(--white-text);
 }

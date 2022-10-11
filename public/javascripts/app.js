@@ -48,7 +48,7 @@ function defineCurrentCase() {
     const gridCases = document.querySelectorAll('[data-grid-case]');
     
     for (const gridCase of gridCases) {
-        if (gridCase.innerHTML != "") {
+        if ($(gridCase).html() != "") {
             currentCase++
         }
     }
@@ -99,7 +99,7 @@ function hideReplayButton() {
 
 function showReplayButton() {
     const replayButton = document.querySelector('[data-replay-button]');
-    replayButton.style.display = "flex";
+    $(replayButton).css("display", "flex");
 }
 
 function hideRefreshIcon() {
@@ -109,7 +109,7 @@ function hideRefreshIcon() {
 
 function showRefreshIcon() {
     const refreshIcon = document.querySelector('[data-refresh-icon]');
-    refreshIcon.style.display = "flex";
+    $(refreshIcon).css("display", "flex");
 }
 
 function chooseRandomWord() {
@@ -125,6 +125,7 @@ function removeDarkMode() {
     const body = document.body;
     const navbar = document.querySelector('[data-page-element="navbar"]');
     const modals = document.querySelectorAll('[data-page-element="modal"]');
+    const leaderBoardRows = document.querySelectorAll('[data-graph-row]');
     const navbarIcons = document.querySelectorAll('[data-page-element="navbar-icon"]');
     const refreshIcon = document.querySelector('[data-refresh-icon=""]');
     const gridCases = document.querySelectorAll('[data-grid-case]');
@@ -138,8 +139,10 @@ function removeDarkMode() {
     for (const modal of modals) {
         $(modal).removeClass("darkMode-modals");
     }
+    for (const row of leaderBoardRows) {
+        $(row).removeClass("graph-dark-mode");
+    }
     $(refreshIcon).removeClass('darkMode-icons');
-
     for (const gridCase of gridCases) {
         $(gridCase).css('border-color', "#d3d6da");
     }
@@ -152,6 +155,7 @@ function addDarkMode() {
     const body = document.body;
     const navbar = document.querySelector('[data-page-element="navbar"]');
     const modals = document.querySelectorAll('[data-page-element="modal"]');
+    const leaderBoardRows = document.querySelectorAll('[data-graph-row]');
     const navbarIcons = document.querySelectorAll('[data-page-element="navbar-icon"]');
     const refreshIcon = document.querySelector('[data-refresh-icon=""]');
     const gridCases = document.querySelectorAll('[data-grid-case]');
@@ -164,6 +168,9 @@ function addDarkMode() {
     }
     for (const modal of modals) {
         $(modal).addClass("darkMode-modals");
+    }
+    for (const row of leaderBoardRows) {
+        $(row).addClass("graph-dark-mode");
     }
     $(refreshIcon).addClass('darkMode-icons');
     for (const gridCase of gridCases) {
@@ -245,7 +252,7 @@ function resetCase() {
     } else {
         gridCase = document.querySelector('[data-grid-case="' + (currentCase - 1) + '"]');
     }
-    if (gridCase.getAttribute("data-grid-row") == currentRow) {
+    if ($(gridCase).attr("data-grid-row") == currentRow) {
         $(gridCase).html("");
         --currentCase;
         if (currentCase < 1) {
@@ -267,9 +274,7 @@ function verifyAnswer() {
             lettersMatching += verifyLetter(letterToCheck, rowOfLetters, i);
             letterToCheck--;
         }
-
         saveRowToArray(currentRow);
-
         if(lettersMatching == rowOfLetters.length) {
             incrementGuesses(currentRow - 1);
             wordIsDiscovered();
