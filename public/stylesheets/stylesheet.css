@@ -1,8 +1,14 @@
 :root {
+    --white-text: white;
     --grey-outline: #d3d6da;
     --matches-bc: #538d4e;
     --in-the-word-bc: #f7da21;
     --not-in-the-word-bc: #818384;
+    --dm-body: #000000;
+    --dm-grey-outline: #3a3a3c;
+    --dm-lighter-background: #171717;
+
+
 }
 
 html {
@@ -152,12 +158,12 @@ button:active:focus, button:focus {
 }
 
 .darkMode-body {
-    background-color: #000000;
+    background-color: var(--dm-body);
     color : white;
 }
 
 .darkMode-navbar {
-    border-bottom: 1px solid #3a3a3c;
+    border-bottom: 1px solid var(--dm-grey-outline);
 }
 
 .darkMode-icons {
@@ -165,12 +171,32 @@ button:active:focus, button:focus {
 }
 
 .darkMode-modals {
-    background-color: #171717 !important; 
-    color: white !important;
+    background-color: var(--dm-lighter-background) !important; 
+    color: var(--white-text) !important;
 }
 
 .darkMode-kbd {
-    background-color: #171717;
-    color: white;
+    background-color: var(--dm-lighter-background);
+    color: var(--white-text);
     opacity: 60%;
+}
+
+.title {
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+[data-leaderboard-item="graph"] .col {
+    margin-left: 1.5rem;
+}
+
+.graph {
+    margin: 0.25rem;
+    padding: 0.25rem;
+    padding-left: 0.75rem;
+    border-radius: 2px;
+    background-color: var(--not-in-the-word-bc);
+    width: 10%;
+    font-weight: bold;
+    justify-content: center;
 }

@@ -4,36 +4,22 @@ let lostGames = 0;
 let streak = 0;
 let maxStreak = 0;
 
-function checkNullUndefined(value) {
-    if (isNaN(value)) {
-        return true;
-    }
-    return false;
-}
-
 export function initStats() {
-    playedGames = localStorage.getItem('playedGames');
-    wonGames = localStorage.getItem('wonGames');
-    lostGames = localStorage.getItem('lostGames');
-    streak = localStorage.getItem('streak');
-    maxStreak = localStorage.getItem('maxStreak');
-    if (checkNullUndefined(playedGames)) {
-        playedGames = 0;
+    if (localStorage.getItem("playedGames") != null) {
+        playedGames = localStorage.getItem("playedGames");
     }
-    if (checkNullUndefined(wonGames)) {
-        wonGames = 0;
+    if (localStorage.getItem("wonGames") != null) {
+        wonGames = localStorage.getItem("wonGames");
     }
-    if (checkNullUndefined(lostGames)) {
-        lostGames - 0;
+    if (localStorage.getItem("lostGames") != null) {
+        lostGames = localStorage.getItem("lostGames" != null);
     }
-    if (checkNullUndefined(streak)) {
-        streak = 0;
+    if (localStorage.getItem("streak") != null) {
+        streak = localStorage.getItem("streak");
     }
-    if (checkNullUndefined(maxStreak)) {
-        maxStreak = 0;
+    if (localStorage.getItem("maxStreak") != null) {
+        maxStreak = localStorage.getItem("maxStreak");
     }
-
-    addStats();
 }
 
 export function incrementWinCounter() {
@@ -41,7 +27,6 @@ export function incrementWinCounter() {
     localStorage.setItem("wonGames", wonGames);
     incrementPlayedGames();
     incrementStreak();
-    addStats();
 }
 
 export function incrementDefeatCounter() {
@@ -49,13 +34,18 @@ export function incrementDefeatCounter() {
     localStorage.setItem("lostGames", lostGames);
     streakEnding();
     incrementPlayedGames();
-    addStats();
+}
+
+export function addStats() {
+    addPlayedGames();
+    addWonPercentage();
+    addCurrentStreak();
+    addMaxStreak();
 }
 
 function incrementPlayedGames() {
     playedGames++;
     localStorage.setItem("playedGames", playedGames);
-    addStats();
 }
 
 function incrementStreak() {
@@ -63,53 +53,49 @@ function incrementStreak() {
     if (streak > maxStreak) {
         maxStreak = streak;
         localStorage.setItem("maxStreak", maxStreak);
+        addMaxStreak();
     }
     localStorage.setItem("streak", streak);
-    addStats();
 }
 
 function streakEnding() {
     if (streak > maxStreak) {
         maxStreak = streak;
         localStorage.setItem("maxStreak", maxStreak);
+        addMaxStreak();
     }
     streak = 0;
     localStorage.setItem("streak", streak);
-    addStats();
-}
-
-function addStats() {
-    addPlayedGames();
-    addWonPercentage();
-    addCurrentStreak();
-    addMaxStreak();
 }
 
 function addPlayedGames() {
     const playedGamesElem = document.querySelector('[data-leaderboard-item="played-games"]');
-    playedGamesElem.innerHTML = playedGames;
+    if (localStorage.getItem("playedGames") != null) {
+        $(playedGamesElem).html(localStorage.getItem("playedGames"));
+    }
 }
 
 function addWonPercentage() {
     const winPercentageElem = document.querySelector('[data-leaderboard-item="win-percentage"]');
-    if (localStorage.getItem("wonGames") > 0) {
-        $(winPercentageElem).html(((wonGames / playedGames) * 100).toFixed(0));
-    } else if (wonGames == 0) {
-        $(winPercentageElem).html("0");
-    } else {
-        $(winPercentageElem).html("100");
+    if (localStorage.getItem("wonGames") != null) { 
+        if (localStorage.getItem("wonGames") > 0) {
+            $(winPercentageElem).html(((localStorage.getItem("wonGames") / localStorage.getItem("playedGames")) * 100).toFixed(0));
+        } else if (wonGames == 0) {
+            $(winPercentageElem).html("0");
+        }
     }
-
 }
 
 function addCurrentStreak() {
     const streakElem = document.querySelector('[data-leaderboard-item="streak"]');
-    $(streakElem).html(streak);
+    if (localStorage.getItem("streak") != null) {
+        $(streakElem).html(localStorage.getItem("streak"));
+    }
 }
 
 function addMaxStreak() {
     const maxStreakElem = document.querySelector('[data-leaderboard-item="max-streak"]')
-    $(maxStreakElem).html(maxStreak);
+    if (localStorage.getItem("maxStreak") != null) {
+        $(maxStreakElem).html(localStorage.getItem("maxStreak"));
+    }
 }
-
-addStats();

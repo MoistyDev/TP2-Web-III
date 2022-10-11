@@ -1,7 +1,7 @@
 import { getFile } from "./wordlist.js";
 import { printGrid, printStates, resetCasesStates, resetGridValues, saveRowToArray } from "./gridCache.js";
-import { initStats, incrementWinCounter, incrementDefeatCounter } from "./stats.js";
-import { incrementGuessedWordRow } from "./statsGraph.js";
+import { incrementWinCounter, incrementDefeatCounter, addStats, initStats } from "./stats.js";
+import { incrementGuesses, setGuesses } from "./statsGraph.js";
 
 const WORDS = await getFile();
 const toggleSwitch = document.querySelector('[data-settings-modal="toggleSwitch"]');
@@ -13,15 +13,33 @@ let wordDiscovered;
 
 function setSelectedWord() {
     window.localStorage.setItem("selectedWord", selectedWord);
-    window.localStorage.setItem("wordIsDiscovered", wordDiscovered);
 }
 
 function getSelectedWord() {
     if (window.localStorage.getItem("selectedWord") != null) {
         selectedWord = (window.localStorage.getItem("selectedWord"));
     }
-    if (window.localStorage.getItem("wordIsSelected") != null) {
-        wordDiscovered = (window.localStorage.getItem("wordIsSelected"));
+}
+
+function getWordFound() {
+    if (window.localStorage.getItem("wordDiscovered") != null) {
+        wordDiscovered = window.localStorage.getItem("wordDiscovered");
+    }
+}
+
+function setWordFound() {
+    window.localStorage.setItem("wordDiscovered", wordDiscovered);
+}
+
+function setDarkMode() {
+    window.localStorage.setItem("darkMode", toggleSwitch.checked);
+}
+
+function getDarkMode() {
+    const toggleSwitch = document.querySelector('[data-settings-modal="toggleSwitch"]');
+    if (window.localStorage.getItem("darkMode") == "true") {
+        addDarkMode();
+        toggleSwitch.checked = true;
     }
 }
 
@@ -32,7 +50,6 @@ function defineCurrentCase() {
     for (const gridCase of gridCases) {
         if (gridCase.innerHTML != "") {
             currentCase++
-            console.log(currentCase);
         }
     }
 }
@@ -100,18 +117,11 @@ function chooseRandomWord() {
     return (WORDS[randomNumber].toUpperCase());
 }
 
-function cheatModeVerification() {
-    const cheatCode = "robert";
-    if (prompt("Enter cheat code ") == cheatCode) {
-        alert("Here is the selected word : " + (selectedWord));
-    }
-}
-
 function isLetter(str) {
     return str.length === 1 && str.match(/[a-z]/i);
 }
 
-function addDarkMode() {
+function removeDarkMode() {
     const body = document.body;
     const navbar = document.querySelector('[data-page-element="navbar"]');
     const modals = document.querySelectorAll('[data-page-element="modal"]');
@@ -138,7 +148,7 @@ function addDarkMode() {
     }
 }
 
-function removeDarkMode() {
+function addDarkMode() {
     const body = document.body;
     const navbar = document.querySelector('[data-page-element="navbar"]');
     const modals = document.querySelectorAll('[data-page-element="modal"]');
@@ -169,10 +179,12 @@ function removeDarkMode() {
 function manageDarkMode() {
     const toggleSwitch = document.querySelector('[data-settings-modal="toggleSwitch"]');
     $(toggleSwitch).click(function(e) {
-        if (toggleSwitch.checked == false) {
+        if (toggleSwitch.checked) {
             addDarkMode();
-        } else if (toggleSwitch.checked) {
+            setDarkMode();
+        } else if (!toggleSwitch.checked) {
             removeDarkMode();
+            setDarkMode();
         }
     });
 }
@@ -259,10 +271,13 @@ function verifyAnswer() {
         saveRowToArray(currentRow);
 
         if(lettersMatching == rowOfLetters.length) {
+            incrementGuesses(currentRow - 1);
             wordIsDiscovered();
+            addStats();
         }
         if (currentRow == 6 && !wordDiscovered) {
             wordIsNotDiscovered();
+            addStats();
         }
         incrementCurrentRow();
     }
@@ -296,7 +311,8 @@ function wordIsDiscovered() {
     hideRefreshIcon();
     showReplayButton();
     incrementWinCounter();
-    incrementGuessedWordRow(currentRow - 1);
+    setWordFound();
+    getWordFound();
 }
 
 function wordIsNotDiscovered() {
@@ -407,6 +423,7 @@ function resetGame() {
         setSelectedWord();
         resetGridValues();
         resetCasesStates();
+        setWordFound();
     })
 
     $(replayButton).click(function(e) {
@@ -416,16 +433,25 @@ function resetGame() {
         setSelectedWord();
         resetGridValues();
         resetCasesStates();
+        setWordFound();
     })
 }
 
+function stringToBoolean(string) {
+    return string == "true";
+}
+
+getDarkMode();
+setGuesses();
 initStartVariables();
 initStats();
+addStats();
 getSelectedWord();
 setSelectedWord();
-hideReplayButton();
+getWordFound();
+setWordFound();
+wordDiscovered = stringToBoolean(wordDiscovered);
 initOnScreenKBD();
-cheatModeVerification();
 readUserInputs();
 resetGame();
 manageDarkMode();
@@ -433,3 +459,7 @@ printGrid();
 printStates();
 defineCurrentCase();
 defineCurrentRow();
+if (wordDiscovered) {
+    hideRefreshIcon();
+    showReplayButton();
+}

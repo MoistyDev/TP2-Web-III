@@ -146,7 +146,6 @@ export function printStates() {
 export function printGrid() {
     const rows = document.querySelectorAll('[data-grid-row]');
     for (const row of rows) {
-        console.log($(row).attr("data-grid-row"));
         switch ($(row).attr("data-grid-row")) {
             case "1" :
                 $(document.querySelector('[data-grid-case="1"]')).html(GRID_VALUES[$(row).attr("data-grid-row") - 1].word.charAt(0));
